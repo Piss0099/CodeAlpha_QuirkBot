@@ -33,4 +33,25 @@ def load_faqs():
 faqs = load_faqs()
 questions = [preprocess(item["question"]) for item in faqs]
 answers = [item["answer"] for item in faqs]
+# Vectorize
+vectorizer = TfidfVectorizer().fit(questions)
+q_vectors = vectorizer.transform(questions)
 
+# Streamlit UI
+st.title("🤖 QuirkBot - FAQ Assistant")
+st.write("Ask me a question and I'll try to answer based on stored FAQs.")
+
+user_input = st.text_input("Ask a question:")
+
+if user_input:
+    processed_q = preprocess(user_input)
+    user_vector = vectorizer.transform([processed_q])
+    similarity = cosine_similarity(user_vector, q_vectors)
+    idx = similarity.argmax()
+    score = similarity[0][idx]
+
+    if score > 0.3:
+        st.success(f"💡 {answers[idx]}")
+    else:
+        st.warning("❓ Sorry, I don’t know the answer to that yet.")
+        
