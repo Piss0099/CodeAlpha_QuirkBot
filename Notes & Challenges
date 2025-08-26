@@ -1,0 +1,10 @@
+# QuirkBot - Notes & Challenges
+
+1. Simple TF-IDF without preprocessing gave poor results.
+   → I added stopword removal and stemming for better accuracy.
+
+2. Sometimes irrelevant answers came back.
+   → I set a similarity threshold (0.3) to avoid wrong matches.
+
+3. FAQs stored in a JSON file for easy customization.
+
