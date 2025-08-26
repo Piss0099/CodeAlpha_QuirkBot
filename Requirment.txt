@@ -1,0 +1,8 @@
+streamlit
+scikit-learn
+nltk
+Notes (realistic problems faced):
+
+Added stopword removal & stemming → improves accuracy.
+
+Sometimes multiple questions are similar → added similarity threshold 0.3 to avoid wrong matches.
